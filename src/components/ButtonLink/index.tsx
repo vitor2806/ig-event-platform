@@ -7,7 +7,7 @@ interface ButtonProps {
   title: string;
 }
 
-export function Button({ title, href, icon, variant }: ButtonProps) {
+export function ButtonLink({ title, href, icon, variant }: ButtonProps) {
   return (
     <a href={href} className={variant}>
       <>
