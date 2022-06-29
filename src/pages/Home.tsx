@@ -4,7 +4,7 @@ import HeroImg from '../components/HeroImg';
 
 export function Home() {
   return (
-    <div className="flex flex-col items-center py-[120px] bg-[url('../assets/blur.svg')] bg-cover">
+    <div className="flex flex-col items-center py-[120px] bg-[url('../assets/blur.svg')] bg-cover bg-blur bg-no-repeat">
       <Hero />
       <HeroImg />
       <Footer />

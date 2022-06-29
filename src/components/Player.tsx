@@ -3,47 +3,20 @@ import { ButtonLink } from './ButtonLink';
 import { DefaultUi, Player, Youtube } from '@vime/react';
 import '@vime/core/themes/default.css';
 import { gql, useQuery } from '@apollo/client';
-
-const GET_LESSON_BY_SLUG_QUERY = gql`
-  query ($slug: String) {
-    lesson(where: { slug: $slug }) {
-      title
-      id
-      description
-      teacher {
-        avatarURL
-        bio
-        name
-      }
-    }
-  }
-`;
-
-interface GetLessonBySlugResponse {
-  lesson: {
-    title: string;
-    videoId: string;
-    description: string;
-    teacher: {
-      bio: string;
-      avatarURL: string;
-      name: string;
-    };
-  };
-}
+import { useGetLessonBySlugQuery } from '../graphql/generated';
 
 interface PlayerProps {
   lessonSlug: string;
 }
 
-export function PlayerStream({ lessonSlug }: PlayerProps) {
-  const { data } = useQuery<GetLessonBySlugResponse>(GET_LESSON_BY_SLUG_QUERY, {
+export function PlayerStream(props: PlayerProps) {
+  const { data } = useGetLessonBySlugQuery({
     variables: {
-      slug: lessonSlug,
+      slug: props.lessonSlug,
     },
   });
 
-  if (!data) {
+  if (!data || !data.lesson) {
     return (
       <div className="flex-1">
         <p>Loading...</p>
@@ -70,13 +43,15 @@ export function PlayerStream({ lessonSlug }: PlayerProps) {
           <main className="flex-1">
             <h1 className="text-2xl font-bold">{data.lesson.title}</h1>
             <p className="mt-4 text-gray-300 leading-relaxed">{data.lesson.description}</p>
-            <div className="flex items-center gap-4 mt-6">
-              <img src={data.lesson.teacher.avatarURL} alt={`${data.lesson.teacher.name} profile picture`} className="h-16 w-16 rounded-full border-2 border-blue-500" />
-              <div className="leading-relaxed">
-                <strong className="text-2xl block">{data.lesson.teacher.name}</strong>
-                <span className="text-gray-300 text-sm block">{data.lesson.teacher.bio}</span>
+            {data.lesson.teacher && (
+              <div className="flex items-center gap-4 mt-6">
+                <img src={data.lesson.teacher.avatarURL} alt={`${data.lesson.teacher.name} profile picture`} className="h-16 w-16 rounded-full border-2 border-blue-500" />
+                <div className="leading-relaxed">
+                  <strong className="text-2xl block">{data.lesson.teacher.name}</strong>
+                  <span className="text-gray-300 text-sm block">{data.lesson.teacher.bio}</span>
+                </div>
               </div>
-            </div>
+            )}
           </main>
           <aside className="flex flex-col gap-4">
             <ButtonLink title="Discord Server" variant="primary" icon={<DiscordLogo size={24} />} />
