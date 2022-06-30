@@ -24,8 +24,8 @@ export function PlayerStream(props: PlayerProps) {
   }
 
   return (
-    // Video
     <div className="flex-1">
+      {/* Video */}
       <div className="flex justify-center bg-black">
         <div className="h-full w-full max-w-[1100px] max-h-[60vh] aspect-video">
           <Player>
@@ -35,7 +35,6 @@ export function PlayerStream(props: PlayerProps) {
         </div>
       </div>
       {/* End of video */}
-
       <div className="p-8 max-w-[1100px] mx-auto">
         {/* Video description */}
         <section className="flex items-start gap-16">
