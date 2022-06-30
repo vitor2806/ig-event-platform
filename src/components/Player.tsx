@@ -2,7 +2,6 @@ import { CaretRight, DiscordLogo, FileArrowDown, Lightning } from 'phosphor-reac
 import { ButtonLink } from './ButtonLink';
 import { DefaultUi, Player, Youtube } from '@vime/react';
 import '@vime/core/themes/default.css';
-import { gql, useQuery } from '@apollo/client';
 import { useGetLessonBySlugQuery } from '../graphql/generated';
 
 interface PlayerProps {
