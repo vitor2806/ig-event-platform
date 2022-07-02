@@ -37,7 +37,7 @@ export function PlayerStream(props: PlayerProps) {
       {/* End of video */}
       <div className="p-8 max-w-[1100px] mx-auto">
         {/* Video description */}
-        <section className="flex items-start gap-16">
+        <section className="flex flex-col md:flex-row items-start gap-16">
           <main className="flex-1">
             <h1 className="text-2xl font-bold">{data.lesson.title}</h1>
             <p className="mt-4 text-gray-300 leading-relaxed">{data.lesson.description}</p>
@@ -51,14 +51,14 @@ export function PlayerStream(props: PlayerProps) {
               </div>
             )}
           </main>
-          <aside className="flex flex-col gap-4">
+          <aside className="flex md:flex-col md:justify-start md:w-fit w-full justify-center gap-4">
             <ButtonLink title="Discord Server" variant="primary" icon={<DiscordLogo size={24} />} />
             <ButtonLink title="challenges" variant="secondary" icon={<Lightning size={24} />} />
           </aside>
         </section>
         {/* end of Video description */}
         {/* Video content */}
-        <section className="gap-8 mt-20 grid grid-cols-2">
+        <section className="gap-8 mt-20 grid grid-rows-2 lg:grid-cols-2">
           <a href="" className="bg-gray-700 rounded overflow-hidden flex items-stretch gap-6 hover:bg-gray-600 transition-colors">
             <div className="bg-green-700 h-full p-6 flex items-center">
               <FileArrowDown size={40} />
